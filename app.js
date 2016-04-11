@@ -1,10 +1,14 @@
 $(document).ready(function(){
 	var container = $('.container')
+	var tweetList = $('.tweet-list')
+	var templateHtml = $('#row').html();
+  	var compiledTemplate = Handlebars.compile(templateHtml);
 	var currTweetsList = []
 	//DONT THINK I NEED THE BELOW LINE
 	//var requestURI = '1.1/search/tweets.json?q='
 	//var fireb = new Firebase("https://ga-final-project.firebaseio.com")
 	var repeatTweets = 0
+	var inputKeyword = ''
 
 	$('.find-tweets-button').on('click',function(e){
 		e.preventDefault()
@@ -54,20 +58,48 @@ $(document).ready(function(){
 	
 
 	function createTweetBox(obj){
-		console.log('made it to create Tweet Box')
-		//make next line .addClass('box') to add to actual box not just line
-    	var $tweetBox = $('<div></div>').addClass('twt-box')
     	var tweetText = obj.text
-    	var twitterHandle = obj.user.screen_name
-    	
-    	$tweetBox.css({backgroundColor: 'red'})
-  	  	$tweetBox.html('@' + twitterHandle + '\n' + tweetText)
-  	  	container.append($tweetBox)
+    	var twitterHandle = '@' + obj.user.screen_name
+    	var profileName = obj.user.name
+
+    	var row = compiledTemplate({
+    		name: profileName,
+   			screenName: twitterHandle,
+   			twtText: tweetText
+    	})
+
+    	tweetList.append(row)
+
+    	// //$tweetBox.css({backgroundColor: 'red'})
+  	  // 	$tweetBox.html('@' + twitterHandle + '\n' + tweetText)
+  	  // 	container.append($tweetBox)
 	}
 
+	function makeRow(newText){
+  
+  var row = compiledTemplate({
+      todoThing: newText
+    });
+  tweetList.append(row);
+};
+
 	
-	$(window).scroll(function(e){
-		console.log(e)
-	})
+	// $(window).scroll(function(e){
+	// 	console.log(e)
+	// 	//below from internet - still need to figure out how/when to call getTweets
+	// 	// if($(window).scrollTop() + $(window).height() > $(document).height() - 100){
+	// 	// 	$(window).unbind('scroll')
+
+	// 	// }
+	// 	var pageLength = ***size of page number***
+	// 	if(e = pageLength){
+	// 		pageLength *=2
+	// 		getTweets(inputKeyword, 'recent', 10)
+	// 	if(repeatTweets > 0){
+
+	// 	}
+			
+	// 	}
+	// })
 
 })

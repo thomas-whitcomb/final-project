@@ -8,17 +8,15 @@
       width: 100%;
     }
     .container {
-      clear: both;
+      clear: both;	
       align: center;
     }
     .box {
-      height: 400px;
+      min-height: 80px;
       width: 400px;
-      margin: 2px;
-      text-align: center;
-      font-size: 1em;
-      line-height: 185px;
-      font-weight: bold;
+      padding: 20px;
+      border-radius: 25px;
+      border: 2px solid #4099FF;
       display: block;
     }
   </style>
@@ -33,7 +31,17 @@
   <input class="search-box" type="text" placeholder="What to search for...">
   <button class="find-tweets-button">Search!</button>
 
-  <div class="container"></div>
+
+  <div class="container">
+  	<ol class="tweet-list"></ol>
+  </div>
+
+  <script id="row" type="text/x-handlebars-template">
+    <li class="box">{{name}} {{screenName}} <br>
+    <p>{{twtText}}</p>
+    </li>
+
+  </script>
 
 </body>
 </html>
